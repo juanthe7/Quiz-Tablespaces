@@ -1,1 +1,36 @@
 Puntos a resolver:
+Do the following:
+
+1: Create a bigtablespace with the name "big_tbs_your_name" example 'big_tbs_andres". It should contains one datafile of 1Gb
+CREATE BIGFILE TABLESPACE big_tbs_JUANDAVIDCASTANO DATAFILE 
+'C:\Users\Satellite\Desktop\TallerOracle\big_tablespace_datafile1.DBF' SIZE 1024M;
+
+
+2:Create a tablespace named "quiz" with three datafiles, each of them of 200Mb. When more space is required, 600 kilobyte extents will be added up to a maximum size of 100 Mb
+
+CREATE TABLESPACE quiz DATAFILE 
+'C:\Users\Satellite\Desktop\TallerOracle\quiz1.DBF' SIZE 200M,
+'C:\Users\Satellite\Desktop\TallerOracle\quiz2.DBF' SIZE 200M,
+'C:\Users\Satellite\Desktop\TallerOracle\quiz3.DBF' SIZE 200M
+AUTOEXTEND ON NEXT 600M MAXSIZE 1000M;
+
+
+3:Create a profile with:
+
+CREATE PROFILE DBA_JUAN LIMIT
+SESSIONS_PER_USER               UNLIMITED
+CPU_PER_SESSION                 UNLIMITED
+IDLE_TIME                       15
+FAILED_LOGIN_ATTEMPTS           UNLIMITED;
+
+4. Create a user with the default tablespace created in the item 2 and assign profile created in last step.
+
+CREATE USER JUANDAVIDCASTANO
+IDENTIFIED BY JUANCASTANO1
+DEFAULT tablespace quiz
+PROFILE DBA_JUAN;
+
+
+5: Allow the user to connect to the application
+
+GRANT CREATE SESSION TO JUANDAVIDCASTANO;
